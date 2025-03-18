@@ -19,4 +19,24 @@ public class Slots extends Game{
             symbols = symbolsToChooseFrom;
         }
     }
+    public int getColumns(){
+        return columns;
+    }
+    public void setColumns(int a){
+        columns = a;
+    }
+    public int getNumberOfSymbols(){
+        return numberOfSymbols;
+    }
+    public void setNumberOfSymbols(int b){
+        numberOfSymbols = b;
+        symbols = new String[numberOfSymbols];
+        for (int i=0; i<numberOfSymbols; i++){
+            symbols[i] = symbolsToChooseFrom[i];
+        }
+    }
+    @Override
+    public void play(){
+
+    }
 }
