@@ -36,4 +36,7 @@ public class Game {
     public String toString(){
         return name + " is a game with a payout of " + payout + " and a current bet size of " + betSize + " and has been played " + timesPlayed + " times";
     }
+    public void play(){
+        timesPlayed++;
+    }
 }
