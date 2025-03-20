@@ -7,6 +7,7 @@ public class Roulette extends Game {
     private int choice;
     private int tile;
     private int color;
+    private int EvenOrOdd;
     private int redSquares = 18;
     private int blackSquares = 18;
     private int greenSquares = 1;
@@ -18,20 +19,20 @@ public class Roulette extends Game {
     public void play() {
         // asks user how much they want to bet
         System.out.println("How much would you like to bet?");
-            while (true) {
-                String input = in.nextLine();
-                Pattern pattern = Pattern.compile("\\d+");
-                Matcher matcher = pattern.matcher(input);
+        while (true) {
+            String input = in.nextLine();
+            Pattern pattern = Pattern.compile("\\d+");
+            Matcher matcher = pattern.matcher(input);
 
-                if (matcher.find()) {
-                    int number = Integer.parseInt(matcher.group());
-                    setBetSize(number);
-                    break;
-                } else {
-                    System.out.println("No number found.");
-                    System.out.println("Please try again");
-                }
+            if (matcher.find()) {
+                int number = Integer.parseInt(matcher.group());
+                setBetSize(number);
+                break;
+            } else {
+                System.out.println("No number found.");
+                System.out.println("Please try again");
             }
+        }
         // if choice = 1, user chooses to bet on a color
         if (choice == 1) {
             System.out.println(getName() + " chooses to bet on COLOR");
@@ -73,6 +74,34 @@ public class Roulette extends Game {
                     int number = Integer.parseInt(matcher.group());
                     if (number > -1 && number < 37) {
                         tile = number;
+                        break;
+                    }
+                    System.out.println("Not a valid choice");
+                } else {
+                    System.out.println("No number found.");
+                    System.out.println("Please try again");
+                }
+            }
+        }
+        // if choice = 3, user chooses to bet on a even or odd
+        if (choice == 3) {
+            System.out.println(getName() + " chooses to bet on EVEN/ODD");
+            System.out.println("""
+                    Choose Even or Odd:
+                    Option 1: ODD
+                    Option 2: EVEN
+                    Type "1" or "2" to indicate your choice
+                    """);
+            while (true) {
+                String input = in.nextLine();
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(input);
+
+                if (matcher.find()) {
+                    int number = Integer.parseInt(matcher.group());
+                    if (number > 0 && number < 3) {
+                        EvenOrOdd = number;
+                        break;
                     }
                     System.out.println("Not a valid choice");
                 } else {
@@ -110,3 +139,6 @@ public class Roulette extends Game {
         }
     }
 }
+    public void roll() {
+        
+    }
