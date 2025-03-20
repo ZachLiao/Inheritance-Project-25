@@ -51,6 +51,7 @@ public class Roulette extends Game {
                     int number = Integer.parseInt(matcher.group());
                     if (number > 0 && number < 4) {
                         color = number;
+                        break;
                     }
                     System.out.println("Not a valid choice");
                 } else {
@@ -99,6 +100,7 @@ public class Roulette extends Game {
                 int number = Integer.parseInt(matcher.group());
                 if (number > 0 && number < 4) {
                     choice = number;
+                    break;
                 }
                 System.out.println("Not a valid choice");
             } else {
