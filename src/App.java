@@ -4,5 +4,6 @@ public class App {
         Roulette r1 = new Roulette("r1", 0, 0);
         r1.intro();
         r1.play();
+        System.out.println("Hi geffen");
     }
 }
