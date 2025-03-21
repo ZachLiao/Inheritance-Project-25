@@ -139,6 +139,3 @@ public class Roulette extends Game {
         }
     }
 }
-    public void roll() {
-        
-    }
