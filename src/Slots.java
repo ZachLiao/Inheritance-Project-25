@@ -38,7 +38,14 @@ public class Slots extends Game{
     }
     @Override
     public void play(){
-
+        String[] result = new String[columns];
+        for (int i=0; i< result.length; i++){
+            result[i] = symbols[(int)(Math.random()*numberOfSymbols)];
+        }
+        for (String result1 : result) {
+            System.out.print(result1 + " ");
+        }
+        
     }
     public void intro() {
         System.out.println("""
