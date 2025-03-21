@@ -8,9 +8,12 @@ public class Roulette extends Game {
     private int tile;
     private int color;
     private int EvenOrOdd;
-    private int redSquares = 18;
-    private int blackSquares = 18;
-    private int greenSquares = 1;
+    // private int redSquares = 18;
+    // private int blackSquares = 18;
+    // private int greenSquares = 1;
+    private int selectedTile;
+    private int selectedColor;
+    private int selectedEvenOrOdd;
 
     public Roulette(String name, int betSize, double payout) {
         super(name, betSize, payout);
@@ -60,6 +63,11 @@ public class Roulette extends Game {
                     System.out.println("Please try again");
                 }
             }
+
+            if (selectedColor == color && color != 3) {
+                System.out.println("You Won" + getBetSize());
+            }
+            
         }
         // if choice = 2, user chooses to bet on a tile
         if (choice == 2) {
@@ -136,6 +144,25 @@ public class Roulette extends Game {
                 System.out.println("No number found.");
                 System.out.println("Please try again");
             }
+        }
+    }
+
+    public void roll() {
+        selectedTile = (int) Math.random()*38;
+        if (selectedTile == 0) {
+            selectedColor = 3;
+        }
+        else if (selectedTile % 2 == 0) {
+            selectedColor = 1;
+        }
+        else if (selectedColor % 2 == 1) {
+            selectedColor = 2;
+        }
+        if (selectedTile % 2 == 0) {
+            selectedEvenOrOdd = 2;
+        }
+        else {
+            selectedEvenOrOdd = 1;
         }
     }
 }
