@@ -17,6 +17,7 @@ public class Slots extends Game{
         for (int i=0; i<numberOfSymbols; i++){
             symbols[i] = symbolsToChooseFrom[i];
         }
+        System.out.println("You have selected to play a slots game with " + columns + " columns and " + numberOfSymbols + " symbols");
         
     }
     public int getColumns(){
