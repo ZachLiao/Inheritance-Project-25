@@ -12,7 +12,7 @@ public class Slots extends Game{
     public Slots(String name, int betSize, double payout){
         super(name, betSize, payout);
         setTimesPlayed(0);
-        intro();
+        intro1D();
         symbols = new String[numberOfSymbols];
         for (int i=0; i<numberOfSymbols; i++){
             symbols[i] = symbolsToChooseFrom[i];
@@ -36,8 +36,7 @@ public class Slots extends Game{
             symbols[i] = symbolsToChooseFrom[i];
         }
     }
-    @Override
-    public void play(){
+    public void play1D(Player a){
         String[] result = new String[columns];
         for (int i=0; i< result.length; i++){
             result[i] = symbols[(int)(Math.random()*numberOfSymbols)];
@@ -45,9 +44,11 @@ public class Slots extends Game{
         for (String result1 : result) {
             System.out.print(result1 + " ");
         }
+        a.setWallet(a.getWallet() - getBetSize() + SlotsPayoutCalculator.calculatePayout(result, columns, numberOfSymbols, getBetSize()));
+        
         
     }
-    public void intro() {
+    public void intro1D() {
         System.out.println("""
                 You chose to play Slots. You may choose from 3 to 7 columns.
                 Type a number 3 through 7 to confirm your choice.
