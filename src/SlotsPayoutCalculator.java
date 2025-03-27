@@ -9,17 +9,20 @@ public class SlotsPayoutCalculator {
         }
         if(allMatch){
             //probability of all match is (1/sym)^(col-1)
-            System.out.println("all symbols match! You win the jackpot");
+            System.out.println("all symbols match! You win the jackpot of $" + (int)(bet*1/((1/sym)^(col-1))*.1));
             return (int)(bet*1/((1/sym)^(col-1))*.1);
         }
-        int numOfSame = 1;
         int MaxNumOfSame = 1;
-        for (int i=0; i<a.length; i++){
-            for (int k=i; k<a.length; k++){
-                if (a[k].equals(a[k+1])){
+        for (int i=0; i<a.length-1; i++){
+            int numOfSame = 1;
+            for (int k=i+1; k<a.length-1; k++){
+                if (a[i].equals(a[k+1])){
                     numOfSame++;
+                    if(k == a.length-2 && a[k].equals(a[k+1])){
+                        numOfSame++;
+                    }
                 }
-                else k = a.length;
+                
             }
             if (numOfSame>MaxNumOfSame){
                 MaxNumOfSame = numOfSame;

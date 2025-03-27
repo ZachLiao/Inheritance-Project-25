@@ -24,6 +24,9 @@ public class Player {
     public void addTotalHandsPlayed() {
         totalHandsPlayed++;
     }
+    public void setTotalHandsPlayed(int a){
+        totalHandsPlayed = a;
+    }
 
     public int getWallet() {
         return wallet;

@@ -14,6 +14,7 @@ public class Roulette extends Game {
     private int selectedTile;
     private int selectedColor;
     private int selectedEvenOrOdd;
+    public static int roulettesPlayed = 0;
 
     public Roulette(String name, int betSize, double payout) {
         super(name, betSize, payout);

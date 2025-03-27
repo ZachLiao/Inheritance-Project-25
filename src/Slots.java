@@ -7,11 +7,11 @@ public class Slots extends Game{
     private int choice;
     private int columns;
     private int numberOfSymbols;
+    public static int slotsPlayed = 0;
     private String[] symbolsToChooseFrom = {"7", "bell", "bar", "bell", "cherry", "clover", "lemon", "diamond", "orange", "watermelon", "horseshoe", "lime"};
     private String[] symbols;
     public Slots(String name, int betSize, double payout){
         super(name, betSize, payout);
-        setTimesPlayed(0);
         intro1D();
         symbols = new String[numberOfSymbols];
         for (int i=0; i<numberOfSymbols; i++){
@@ -45,6 +45,7 @@ public class Slots extends Game{
             System.out.print(result1 + " ");
         }
         a.setWallet(a.getWallet() - getBetSize() + SlotsPayoutCalculator.calculatePayout(result, columns, numberOfSymbols, getBetSize()));
+        slotsPlayed++;
         
         
     }
@@ -91,5 +92,9 @@ public class Slots extends Game{
                 System.out.println("Please try again");
             }
         }
+    }
+    @Override
+    public String toString(){
+        return "You are currently betting $" + getBetSize() + " on Slots";
     }
 }
