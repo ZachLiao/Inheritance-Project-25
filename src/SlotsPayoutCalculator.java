@@ -15,7 +15,7 @@ public class SlotsPayoutCalculator {
         int MaxNumOfSame = 1;
         for (int i=0; i<a.length-1; i++){
             int numOfSame = 1;
-            for (int k=i+1; k<a.length-1; k++){
+            for (int k=i+1; k<a.length; k++){
                 if (a[i].equals(a[k+1])){
                     numOfSame++;
                     if(k == a.length-2 && a[k].equals(a[k+1])){
