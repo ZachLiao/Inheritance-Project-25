@@ -28,8 +28,8 @@ public class SlotsPayoutCalculator {
 
         }
         if(MaxNumOfSame>2){
-            System.out.println("  " +MaxNumOfSame + " symbols match! You win $" + (bet *(sym^MaxNumOfSame)) / NChooseK.C(col, MaxNumOfSame));
-            return bet *(sym^(MaxNumOfSame))/ NChooseK.C(col,MaxNumOfSame);
+            System.out.println("  " +MaxNumOfSame + " symbols match! You win $" + (int)(bet*(Math.pow(sym,MaxNumOfSame))/NChooseK.C(col,MaxNumOfSame)));
+            return (int)(bet*(Math.pow(sym,MaxNumOfSame))/NChooseK.C(col,MaxNumOfSame));
         }
         System.out.println("only " + MaxNumOfSame + " symbols match. You do not win");
         return 0;
