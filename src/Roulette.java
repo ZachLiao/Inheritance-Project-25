@@ -18,9 +18,21 @@ public class Roulette extends Game {
 
     public Roulette(String name, int betSize, double payout) {
         super(name, betSize, payout);
+        selectedTile = (int) Math.random()*38;
+        if (selectedTile == 0) {
+            selectedColor = 3;
+        }
+        else if (selectedTile % 2 == 0) {
+            selectedColor = 1;
+            selectedEvenOrOdd = 2;
+        }
+        else if (selectedColor % 2 == 1) {
+            selectedColor = 2;
+            selectedEvenOrOdd = 1;
+        }
     }
 
-    public void play() {
+    public void play(Player a) {
         // asks user how much they want to bet
         System.out.println("How much would you like to bet?");
         while (true) {
@@ -66,9 +78,18 @@ public class Roulette extends Game {
             }
 
             if (selectedColor == color && color != 3) {
-                System.out.println("You Won" + getBetSize());
+                System.out.println("You Won $" + 2 * getBetSize());
+                a.addToWallet(2 * getBetSize());
             }
-            
+            else if (selectedColor == color && color == 3) {
+                System.out.println("You Won $" + 17 * getBetSize());
+                a.addToWallet(17 * getBetSize());
+            }
+            else {
+                System.out.println("You Lost and lost $" + getBetSize() + ". HAHAHAHA");
+                a.setWallet(a.getWallet() - getBetSize());
+            }
+            roulettesPlayed++;
         }
         // if choice = 2, user chooses to bet on a tile
         if (choice == 2) {
@@ -91,6 +112,15 @@ public class Roulette extends Game {
                     System.out.println("Please try again");
                 }
             }
+
+            if (tile == selectedTile) {
+                System.out.println("You Won $" + 35 * getBetSize());
+                a.addToWallet(35 * getBetSize());
+            }
+            else {
+                System.out.println("You Lost $" + getBetSize() + ". HAHAHAHA");
+            }
+            roulettesPlayed++;
         }
         // if choice = 3, user chooses to bet on a even or odd
         if (choice == 3) {
@@ -118,6 +148,16 @@ public class Roulette extends Game {
                     System.out.println("Please try again");
                 }
             }
+
+            if (EvenOrOdd == selectedEvenOrOdd) {
+                System.out.println("You Won $" + 2 * getBetSize());
+                a.addToWallet(2 * getBetSize());
+            }
+            else {
+                System.out.println("You Lost and lost $" + getBetSize() + ". HAHAHAHA");
+                a.setWallet(a.getWallet() - getBetSize());
+            }
+            roulettesPlayed++;
         }
     }
 
