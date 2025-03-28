@@ -40,6 +40,6 @@ public class Player {
     }
 
     public String toString() {
-        return "Player " + name + " has $" + wallet + " and has played " + totalHandsPlayed;
+        return "Player " + name + " has $" + wallet + " and has played " + totalHandsPlayed + " total games";
     }
 }

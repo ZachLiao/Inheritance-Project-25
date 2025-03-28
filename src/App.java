@@ -53,7 +53,7 @@ public class App {
             }
             //if position = 1, play roulette
             if (position == 1) {
-                int chooseBetSize;
+                int chooseBetSize = 0;
                 System.out.println("""
                         What would you like your bet size to be?
                         type a number between $1 and $5000
@@ -133,7 +133,7 @@ public class App {
                         2) change bet size
                         3) play a different game
                         4) End Game
-                        5) get Player and slots bet size info
+                        5) get Player and bet size info
                             """);
                 while (true) {
                     String input = in.nextLine();
@@ -145,7 +145,7 @@ public class App {
                         if (number == 4) {
                             break outerLoop;
                         }
-                        if (number == 1 && previousPosition == 1) {
+                        if (number == 1 && (previousPosition == 1 || previousPosition ==9)) {
                             position = 8;
                             break;
                         }
@@ -153,8 +153,12 @@ public class App {
                             position = 5;
                             break;
                         }
-                        if (number == 2) {
+                        if (number == 2 && previousPosition == 2) {
                             position = 6;
+                            break;
+                        }
+                        if (number == 2 && previousPosition == 1) {
+                            position = 9;
                             break;
                         }
                         if (number == 3) {
@@ -222,6 +226,36 @@ public class App {
                 p.setTotalHandsPlayed(Slots.slotsPlayed + Roulette.roulettesPlayed);
                 System.out.println(p);
                 System.out.println(s);
+                System.out.println("and " + r);
+                position = 4;
+            }
+            if (position == 9){
+                System.out.println("""
+                        What would you like to change your betsize to for Roulette?
+                        Type a number 1 - 5000
+                        Type 0 to end the code
+                            """);
+                while (true) {
+                    String input = in.nextLine();
+                    Pattern pattern = Pattern.compile("\\d+");
+                    Matcher matcher = pattern.matcher(input);
+
+                    if (matcher.find()) {
+                        int number = Integer.parseInt(matcher.group());
+                        if (number == 0) {
+                            break outerLoop;
+                        }
+                        if (number > 0 && number < 5001) {
+                            r.setBetSize(number);
+                            break;
+                        }
+                        System.out.println("Not a valid choice");
+                    } else {
+                        System.out.println("No number found.");
+                        System.out.println("Please try again");
+                    }
+                }
+                System.out.println("you are now betting with a bet size of $" + r.getBetSize());
                 position = 4;
             }
             if (p.getWallet() <= 0) {

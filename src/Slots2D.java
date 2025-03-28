@@ -25,7 +25,7 @@ public class Slots2D  extends Game{
             if (matcher.find()) {
                 int number = Integer.parseInt(matcher.group());
                 if (number > 2 && number < 8) {
-                    cols = number;
+                    rows = number;
                     break;
                 }
                 System.out.println("Not a valid choice");

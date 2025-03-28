@@ -8,9 +8,9 @@ public class Roulette extends Game {
     private int tile;
     private int color;
     private int EvenOrOdd;
-    private int redSquares = 1;
-    private int blackSquares = 1;
-    private int greenSquares = 1;
+    private int redSquares = 18;
+    private int blackSquares = 18;
+    private int greenSquares = 2;
     private int selectedTile;
     private int selectedColor;
     private int selectedEvenOrOdd;
@@ -35,21 +35,21 @@ public class Roulette extends Game {
 
     public void play(Player a) {
         // asks user how much they want to bet
-        System.out.println("How much would you like to bet?");
-        while (true) {
-            String input = in.nextLine();
-            Pattern pattern = Pattern.compile("\\d+");
-            Matcher matcher = pattern.matcher(input);
+        // System.out.println("How much would you like to bet?");
+        // while (true) {
+        //     String input = in.nextLine();
+        //     Pattern pattern = Pattern.compile("\\d+");
+        //     Matcher matcher = pattern.matcher(input);
 
-            if (matcher.find()) {
-                int number = Integer.parseInt(matcher.group());
-                setBetSize(number);
-                break;
-            } else {
-                System.out.println("No number found.");
-                System.out.println("Please try again");
-            }
-        }
+        //     if (matcher.find()) {
+        //         int number = Integer.parseInt(matcher.group());
+        //         setBetSize(number);
+        //         break;
+        //     } else {
+        //         System.out.println("No number found.");
+        //         System.out.println("Please try again");
+        //     }
+        // }
         // if choice = 1, user chooses to bet on a color
         if (choice == 1) {
             System.out.println(getName() + " chooses to bet on COLOR");
@@ -209,5 +209,8 @@ public class Roulette extends Game {
         else {
             selectedEvenOrOdd = 1;
         }
+    }
+    public String toString(){
+        return "You are currently betting $" + getBetSize() + " on Roulette";
     }
 }
