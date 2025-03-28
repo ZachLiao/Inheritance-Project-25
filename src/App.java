@@ -9,6 +9,7 @@ public class App {
     private static Slots s;
     private static Roulette r;
     private static Player p;
+    private static int previousPosition;
 
     public static void main(String[] args) throws Exception {
         // System.out.println("Hello, Geffen!");
@@ -40,6 +41,7 @@ public class App {
                         int number = Integer.parseInt(matcher.group());
                         if (number > 0 && number < 4) {
                             position = number;
+                            previousPosition = number;
                             break;
                         }
                         System.out.println("Not a valid choice");
@@ -143,7 +145,11 @@ public class App {
                         if (number == 4) {
                             break outerLoop;
                         }
-                        if (number == 1) {
+                        if (number == 1 && previousPosition == 1) {
+                            position = 8;
+                            break;
+                        }
+                        else if (number == 1 && previousPosition == 2) {
                             position = 5;
                             break;
                         }
@@ -167,12 +173,19 @@ public class App {
                 }
             }
            
-            // if position = 4, play slots again
+            // if position = 5, play slots again
             if (position == 5) {
                 s.play1D(p);
                 position = 4;
             }
             
+            //if position = 8, play roulette again
+            if (position == 8) {
+                r.intro();
+                r.play(p);
+                position =4;
+            }
+
             //if position = 6, change bet size
             if (position == 6) {
                 System.out.println("""
@@ -206,6 +219,7 @@ public class App {
             
             //if position = 7, prints out the toString in Roulette and Slots
             if (position == 7) {
+                p.setTotalHandsPlayed(Slots.slotsPlayed + Roulette.roulettesPlayed);
                 System.out.println(p);
                 System.out.println(s);
                 position = 4;

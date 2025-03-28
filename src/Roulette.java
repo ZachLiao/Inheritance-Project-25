@@ -8,9 +8,9 @@ public class Roulette extends Game {
     private int tile;
     private int color;
     private int EvenOrOdd;
-    // private int redSquares = 18;
-    // private int blackSquares = 18;
-    // private int greenSquares = 1;
+    private int redSquares = 1;
+    private int blackSquares = 1;
+    private int greenSquares = 1;
     private int selectedTile;
     private int selectedColor;
     private int selectedEvenOrOdd;
@@ -18,9 +18,10 @@ public class Roulette extends Game {
 
     public Roulette(String name, int betSize, double payout) {
         super(name, betSize, payout);
-        selectedTile = (int) Math.random()*38;
+        selectedTile = (int) (Math.random()*(redSquares + blackSquares + greenSquares));
         if (selectedTile == 0) {
             selectedColor = 3;
+            selectedEvenOrOdd = 2;
         }
         else if (selectedTile % 2 == 0) {
             selectedColor = 1;
@@ -89,6 +90,7 @@ public class Roulette extends Game {
                 System.out.println("You Lost and lost $" + getBetSize() + ". HAHAHAHA");
                 a.setWallet(a.getWallet() - getBetSize());
             }
+            selectedTile = (int) (Math.random()*(redSquares + blackSquares + greenSquares));
             roulettesPlayed++;
         }
         // if choice = 2, user chooses to bet on a tile
@@ -120,6 +122,7 @@ public class Roulette extends Game {
             else {
                 System.out.println("You Lost $" + getBetSize() + ". HAHAHAHA");
             }
+            selectedTile = (int) (Math.random()*(redSquares + blackSquares + greenSquares));
             roulettesPlayed++;
         }
         // if choice = 3, user chooses to bet on a even or odd
@@ -157,6 +160,7 @@ public class Roulette extends Game {
                 System.out.println("You Lost and lost $" + getBetSize() + ". HAHAHAHA");
                 a.setWallet(a.getWallet() - getBetSize());
             }
+            selectedTile = (int) (Math.random()*(redSquares + blackSquares + greenSquares));
             roulettesPlayed++;
         }
     }
