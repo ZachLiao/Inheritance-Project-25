@@ -225,8 +225,16 @@ public class App {
             if (position == 7) {
                 p.setTotalHandsPlayed(Slots.slotsPlayed + Roulette.roulettesPlayed);
                 System.out.println(p);
-                System.out.println(s);
-                System.out.println("and " + r);
+                if (s != null){
+                    System.out.println(s);
+                }
+                if ( r!= null && s!= null){
+                    System.out.print("and ");
+                }
+                if (r != null){
+                    System.out.println(r);
+                }
+                System.out.println();
                 position = 4;
             }
             if (position == 9){

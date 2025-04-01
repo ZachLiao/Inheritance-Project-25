@@ -90,7 +90,7 @@ public class Roulette extends Game {
                 System.out.println("You Lost and lost $" + getBetSize() + ". HAHAHAHA");
                 a.setWallet(a.getWallet() - getBetSize());
             }
-            selectedTile = (int) (Math.random()*(redSquares + blackSquares + greenSquares));
+            roll();
             roulettesPlayed++;
         }
         // if choice = 2, user chooses to bet on a tile
@@ -122,7 +122,7 @@ public class Roulette extends Game {
             else {
                 System.out.println("You Lost $" + getBetSize() + ". HAHAHAHA");
             }
-            selectedTile = (int) (Math.random()*(redSquares + blackSquares + greenSquares));
+            roll();
             roulettesPlayed++;
         }
         // if choice = 3, user chooses to bet on a even or odd
@@ -160,7 +160,7 @@ public class Roulette extends Game {
                 System.out.println("You Lost and lost $" + getBetSize() + ". HAHAHAHA");
                 a.setWallet(a.getWallet() - getBetSize());
             }
-            selectedTile = (int) (Math.random()*(redSquares + blackSquares + greenSquares));
+            roll();
             roulettesPlayed++;
         }
     }
@@ -193,20 +193,17 @@ public class Roulette extends Game {
     }
 
     public void roll() {
-        selectedTile = (int) Math.random()*38;
+        selectedTile = (int) (Math.random()*(redSquares + blackSquares + greenSquares));
         if (selectedTile == 0) {
             selectedColor = 3;
+            selectedEvenOrOdd = 2;
         }
         else if (selectedTile % 2 == 0) {
             selectedColor = 1;
+            selectedEvenOrOdd = 2;
         }
         else if (selectedColor % 2 == 1) {
             selectedColor = 2;
-        }
-        if (selectedTile % 2 == 0) {
-            selectedEvenOrOdd = 2;
-        }
-        else {
             selectedEvenOrOdd = 1;
         }
     }
