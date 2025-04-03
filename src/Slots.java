@@ -8,7 +8,7 @@ public class Slots extends Game{
     private int columns;
     private int numberOfSymbols;
     public static int slotsPlayed = 0;
-    private String[] symbolsToChooseFrom = {"7", "bell", "bar", "bell", "cherry", "clover", "lemon", "diamond", "orange", "watermelon", "horseshoe", "lime"};
+    private String[] symbolsToChooseFrom = {"7️⃣", "🔔", "🍫", "🍇", "🍒", "🍀", "🍋", "💎", "🍊", "🍉", "🧲", "🍋‍🟩"};
     private String[] symbols;
     public Slots(String name, int betSize, double payout){
         super(name, betSize, payout);
@@ -36,14 +36,19 @@ public class Slots extends Game{
             symbols[i] = symbolsToChooseFrom[i];
         }
     }
-    public void play1D(Player a){
+    public void play1D(Player a) throws InterruptedException{
         String[] result = new String[columns];
         for (int i=0; i< result.length; i++){
             result[i] = symbols[(int)(Math.random()*numberOfSymbols)];
         }
-        for (String result1 : result) {
-            System.out.print(result1 + " ");
-        }
+        // for (String result1 : result) {
+        //     System.out.print(result1 + " ");
+        // }
+
+        SlotsAnimation animation = new SlotsAnimation(symbols, result, 30);
+        animation.start();
+        System.out.println();
+        System.out.println();
         a.setWallet(a.getWallet() - getBetSize() + SlotsPayoutCalculator.calculatePayout(result, columns, numberOfSymbols, getBetSize()));
         slotsPlayed++;
         
