@@ -54,12 +54,13 @@ public class App {
             //if position = 1, play roulette
             if (position == 1) {
                 int chooseBetSize = 0;
-                System.out.println("""
+                System.out.print("""
                         What would you like your bet size to be?
-                        type a number between $1 and $5000
+                        type a number between $1 and your bankroll
                         You can change it later
                         type 0 to end the code
                         """);
+                System.out.println("your bankroll is $" + p.getWallet());
                 while (true) {
                     String input = in.nextLine();
                     Pattern pattern = Pattern.compile("\\d+");
@@ -70,7 +71,7 @@ public class App {
                         if (number == 0) {
                             break outerLoop;
                         }
-                        if (number > 0 && number < 5001) {
+                        if (number > 0 && number <= p.getWallet()) {
                             chooseBetSize = number;
                             break;
                         }
@@ -89,12 +90,13 @@ public class App {
             // if position = 2, play slots
             if (position == 2) {
                 int chooseBetSize;
-                System.out.println("""
+                System.out.print("""
                         What would you like your bet size to be?
-                        type a number between $1 and $5000
+                        type a number between $1 and your bankroll
                         You can change it later
                         type 0 to end the code
                         """);
+                System.out.println("you have $" + p.getWallet());
                 while (true) {
                     String input = in.nextLine();
                     Pattern pattern = Pattern.compile("\\d+");
@@ -105,7 +107,7 @@ public class App {
                         if (number == 0) {
                             break outerLoop;
                         }
-                        if (number > 0 && number < 5001) {
+                        if (number > 0 && number <= p.getWallet()) {
                             chooseBetSize = number;
                             break;
                         }
