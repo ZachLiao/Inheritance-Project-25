@@ -34,4 +34,7 @@ public class SlotsPayoutCalculator {
         System.out.println("only " + MaxNumOfSame + " symbols match. You do not win");
         return 0;
     }
+    public static int calculatePayout2D(){
+        return 0;
+    }
 }
