@@ -6,6 +6,7 @@ public class Slots2D  extends Game{
     private int rows;
     private int cols;
     private int numberOfSymbols;
+    public static int slots2DPlayed = 0;
     private String[] symbolsToChooseFrom = {"7️⃣", "🔔", "🍫", "🍇", "🍒", "🍀", "🍋", "💎", "🍊", "🍉", "🧲", "🍋‍🟩"};
     private String[] symbols;
     private Scanner in = new Scanner(System.in);
@@ -113,6 +114,8 @@ public class Slots2D  extends Game{
                 result[r][c] = symbols[(int)(Math.random()*numberOfSymbols)];
             }
         }
+        a.setWallet(a.getWallet() - getBetSize() + SlotsPayoutCalculator.calculatePayout2D(result, cols, rows, numberOfSymbols, getBetSize()));
+        slots2DPlayed++;
     }
     @Override
     public String toString(){
