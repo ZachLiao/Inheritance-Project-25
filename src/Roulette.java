@@ -78,6 +78,14 @@ public class Roulette extends Game {
                 }
             }
 
+            RouletteAnimation r = new RouletteAnimation(selectedTile);
+            try {
+                r.spinToWin();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
             if (selectedColor == color && color != 3) {
                 System.out.println("You Won $" + 2 * getBetSize());
                 a.addToWallet(2 * getBetSize());
@@ -115,6 +123,14 @@ public class Roulette extends Game {
                 }
             }
 
+            RouletteAnimation r = new RouletteAnimation(selectedTile);
+            try {
+                r.spinToWin();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
             if (tile == selectedTile) {
                 System.out.println("You Won $" + 35 * getBetSize());
                 a.addToWallet(35 * getBetSize());
@@ -150,6 +166,14 @@ public class Roulette extends Game {
                     System.out.println("No number found.");
                     System.out.println("Please try again");
                 }
+            }
+
+            RouletteAnimation r = new RouletteAnimation(selectedTile);
+            try {
+                r.spinToWin();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
 
             if (EvenOrOdd == selectedEvenOrOdd) {
