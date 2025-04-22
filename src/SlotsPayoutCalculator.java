@@ -83,7 +83,7 @@ public class SlotsPayoutCalculator {
             System.out.println(maxNumberOfRowsSame + " rows match! You win $" + (int)(bet*(Math.pow(Math.pow(sym,col),maxNumberOfRowsSame))/NChooseK.C(row,maxNumberOfRowsSame)*0.1));
             return (int)(bet*(Math.pow(Math.pow(sym,col),maxNumberOfRowsSame))/NChooseK.C(row,maxNumberOfRowsSame)*0.1);
         }
-        
+        System.out.println("You did not match any rows or columns. You do not win");
         return 0;
     }
 }
