@@ -47,7 +47,7 @@ public class Roulette extends Game {
         if (r.getColor(indexOfSelectedTile).equals("red")) {
             selectedColor = 1;
         }
-        if (r.getColor(indexOfSelectedTile).equals("green")) {
+        if (r.getColor(indexOfSelectedTile).equals("black")) {
             selectedColor = 2;
         }
     }
