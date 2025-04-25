@@ -72,16 +72,16 @@ public class SlotsPayoutCalculator {
             }
         }
         if (maxNumberOfColsSame>0 && maxNumberOfRowsSame>0){
-            System.out.println("You matched " + maxNumberOfColsSame + " columns and " + maxNumberOfRowsSame + " rows and win $" + (int)(bet*(Math.pow(Math.pow(sym,(row + col)/2),maxNumberOfColsSame + maxNumberOfRowsSame))/NChooseK.C((col + row)/2,maxNumberOfColsSame + maxNumberOfRowsSame)*0.1));
-            return (int)(bet*(Math.pow(Math.pow(sym,(row + col)/2),maxNumberOfColsSame + maxNumberOfRowsSame))/NChooseK.C((col + row)/2,maxNumberOfColsSame + maxNumberOfRowsSame)*0.1);
+            System.out.println("You matched " + maxNumberOfColsSame + " columns and " + maxNumberOfRowsSame + " rows and win $" + (int)(bet*(Math.pow(Math.pow(sym,(row + col)/2),maxNumberOfColsSame + maxNumberOfRowsSame))/NChooseK.C((col + row)/2,maxNumberOfColsSame + maxNumberOfRowsSame)));
+            return (int)(bet*(Math.pow(Math.pow(sym,(row + col)/2),maxNumberOfColsSame + maxNumberOfRowsSame))/NChooseK.C((col + row)/2,maxNumberOfColsSame + maxNumberOfRowsSame));
         }
         if (maxNumberOfColsSame>0 && maxNumberOfColsSame>=maxNumberOfRowsSame){
-            System.out.println(maxNumberOfColsSame + " columns match! You win $" + (int)(bet*(Math.pow(Math.pow(sym,row),maxNumberOfColsSame))/NChooseK.C(col,maxNumberOfColsSame)*0.1));
-            return (int)(bet*(Math.pow(Math.pow(sym,row),maxNumberOfColsSame))/NChooseK.C(col,maxNumberOfColsSame)*0.1);
+            System.out.println(maxNumberOfColsSame + " columns match! You win $" + (int)(bet*(Math.pow(Math.pow(sym,row),maxNumberOfColsSame))/NChooseK.C(col,maxNumberOfColsSame)));
+            return (int)(bet*(Math.pow(Math.pow(sym,row),maxNumberOfColsSame))/NChooseK.C(col,maxNumberOfColsSame));
         }
         if (maxNumberOfRowsSame>0){
-            System.out.println(maxNumberOfRowsSame + " rows match! You win $" + (int)(bet*(Math.pow(Math.pow(sym,col),maxNumberOfRowsSame))/NChooseK.C(row,maxNumberOfRowsSame)*0.1));
-            return (int)(bet*(Math.pow(Math.pow(sym,col),maxNumberOfRowsSame))/NChooseK.C(row,maxNumberOfRowsSame)*0.1);
+            System.out.println(maxNumberOfRowsSame + " rows match! You win $" + (int)(bet*(Math.pow(Math.pow(sym,col),maxNumberOfRowsSame))/NChooseK.C(row,maxNumberOfRowsSame)));
+            return (int)(bet*(Math.pow(Math.pow(sym,col),maxNumberOfRowsSame))/NChooseK.C(row,maxNumberOfRowsSame));
         }
         System.out.println("You did not match any rows or columns. You do not win");
         return 0;

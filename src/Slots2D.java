@@ -114,6 +114,12 @@ public class Slots2D  extends Game{
                 result[r][c] = symbols[(int)(Math.random()*numberOfSymbols)];
             }
         }
+        for (String[] r: result){
+            for (String c: r){
+                System.out.print(c + "  ");
+            }
+            System.out.println();
+        }
         a.setWallet(a.getWallet() - getBetSize() + SlotsPayoutCalculator.calculatePayout2D(result, cols, rows, numberOfSymbols, getBetSize()));
         slots2DPlayed++;
     }

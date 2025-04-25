@@ -9,6 +9,7 @@ public class App {
     private static Slots s;
     private static Roulette r;
     private static Player p;
+    private static Slots2D d;
     private static int previousPosition;
 
     public static void main(String[] args) throws Exception {
@@ -30,7 +31,8 @@ public class App {
                         Which game would you like to play?
                         1) Roulette
                         2) Slots
-                        3) End Game
+                        3) Slots2D
+                        4) End game
                         """);
                 while (true) {
                     String input = in.nextLine();
@@ -40,6 +42,11 @@ public class App {
                     if (matcher.find()) {
                         int number = Integer.parseInt(matcher.group());
                         if (number > 0 && number < 4) {
+                            position = number;
+                            previousPosition = number;
+                            break;
+                        }
+                        if (number == 4){
                             position = number;
                             previousPosition = number;
                             break;
@@ -122,9 +129,39 @@ public class App {
                 position = 4;
             }
             
-            // if position = 3, end code
+            // if position = 3, slots2D
             if (position == 3) {
-                break;
+                int chooseBetSize = 0;
+                System.out.print("""
+                        What would you like your bet size to be?
+                        type a number between $1 and your bankroll
+                        You can change it later
+                        type 0 to end the code
+                        """);
+                System.out.println("you have $" + p.getWallet());
+                while (true) {
+                    String input = in.nextLine();
+                    Pattern pattern = Pattern.compile("\\d+");
+                    Matcher matcher = pattern.matcher(input);
+
+                    if (matcher.find()) {
+                        int number = Integer.parseInt(matcher.group());
+                        if (number == 0) {
+                            break outerLoop;
+                        }
+                        if (number > 0 && number <= p.getWallet()) {
+                            chooseBetSize = number;
+                            break;
+                        }
+                        System.out.println("Not a valid choice");
+                    } else {
+                        System.out.println("No number found.");
+                        System.out.println("Please try again");
+                    }
+                }
+                d = new Slots2D("Slots2D", chooseBetSize, 1);
+                d.play2D(p);
+                position = 4;
             }
             
             // if position = 4, ask player what to do next
@@ -155,12 +192,20 @@ public class App {
                             position = 5;
                             break;
                         }
+                        else if (number == 1 && previousPosition == 3){
+                            position = 11;
+                            break;
+                        }
                         if (number == 2 && previousPosition == 2) {
                             position = 6;
                             break;
                         }
                         if (number == 2 && previousPosition == 1) {
                             position = 9;
+                            break;
+                        }
+                        if (number == 2 && previousPosition == 3){
+                            position = 12;
                             break;
                         }
                         if (number == 3) {
@@ -196,9 +241,10 @@ public class App {
             if (position == 6) {
                 System.out.println("""
                         What would you like to change your betsize to for Slots?
-                        Type a number 1 - 5000
+                        Type a number 1 through your bankroll
                         Type 0 to end the code
                             """);
+                System.out.println("You have $" + p.getWallet());
                 while (true) {
                     String input = in.nextLine();
                     Pattern pattern = Pattern.compile("\\d+");
@@ -209,7 +255,7 @@ public class App {
                         if (number == 0) {
                             break outerLoop;
                         }
-                        if (number > 0 && number < 5001) {
+                        if (number > 0 && number <= p.getWallet()) {
                             s.setBetSize(number);
                             break;
                         }
@@ -225,7 +271,7 @@ public class App {
             
             //if position = 7, prints out the toString in Roulette and Slots
             if (position == 7) {
-                p.setTotalHandsPlayed(Slots.slotsPlayed + Roulette.roulettesPlayed);
+                p.setTotalHandsPlayed(Slots.slotsPlayed + Roulette.roulettesPlayed +Slots2D.slots2DPlayed);
                 System.out.println(p);
                 if (s != null){
                     System.out.println(s);
@@ -236,15 +282,22 @@ public class App {
                 if (r != null){
                     System.out.println(r);
                 }
+                if ( r!= null && d!= null){
+                    System.out.print("and ");
+                }
+                if (d!= null){
+                    System.out.println(d);
+                }
                 System.out.println();
                 position = 4;
             }
             if (position == 9){
                 System.out.println("""
-                        What would you like to change your betsize to for Roulette?
-                        Type a number 1 - 5000
+                        What would you like to change your betsize to for roulette?
+                        Type a number 1 through your bankroll
                         Type 0 to end the code
                             """);
+                System.out.println("You have $" + p.getWallet());
                 while (true) {
                     String input = in.nextLine();
                     Pattern pattern = Pattern.compile("\\d+");
@@ -255,7 +308,7 @@ public class App {
                         if (number == 0) {
                             break outerLoop;
                         }
-                        if (number > 0 && number < 5001) {
+                        if (number > 0 && number <= p.getWallet()) {
                             r.setBetSize(number);
                             break;
                         }
@@ -266,6 +319,44 @@ public class App {
                     }
                 }
                 System.out.println("you are now betting with a bet size of $" + r.getBetSize());
+                position = 4;
+            }
+
+            if (position == 10){
+                break;
+            }
+            if (position ==11){
+                d.play2D(p);
+                position =4;
+            }
+            if (position == 12){
+                System.out.println("""
+                        What would you like to change your betsize to for Slots2D?
+                        Type a number 1 through your bankroll
+                        Type 0 to end the code
+                            """);
+                System.out.println("You have $" + p.getWallet());
+                while (true) {
+                    String input = in.nextLine();
+                    Pattern pattern = Pattern.compile("\\d+");
+                    Matcher matcher = pattern.matcher(input);
+
+                    if (matcher.find()) {
+                        int number = Integer.parseInt(matcher.group());
+                        if (number == 0) {
+                            break outerLoop;
+                        }
+                        if (number > 0 && number <= p.getWallet()) {
+                            d.setBetSize(number);
+                            break;
+                        }
+                        System.out.println("Not a valid choice");
+                    } else {
+                        System.out.println("No number found.");
+                        System.out.println("Please try again");
+                    }
+                }
+                System.out.println("you are now betting with a bet size of $" + d.getBetSize());
                 position = 4;
             }
             if (p.getWallet() <= 0) {
