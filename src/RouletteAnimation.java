@@ -51,7 +51,7 @@ public class RouletteAnimation {
 
     public void spinToWin() throws InterruptedException {
         int currentIndex = (int) (Math.random() * ROULETTE_WHEEL.length);
-        int steps = 50 + (int) (Math.random() * 20);
+        int steps = 20 + (int) (Math.random() * 20);
 
         // Spin quickly first
         for (int i = 0; i < steps; i++) {

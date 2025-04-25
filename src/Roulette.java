@@ -12,24 +12,43 @@ public class Roulette extends Game {
     private int blackSquares = 18;
     private int greenSquares = 2;
     private int selectedTile;
+    private int indexOfSelectedTile;
     private int selectedColor;
     private int selectedEvenOrOdd;
     public static int roulettesPlayed = 0;
+    private RouletteAnimation r;
 
     public Roulette(String name, int betSize, double payout) {
         super(name, betSize, payout);
         selectedTile = (int) (Math.random()*(redSquares + blackSquares + greenSquares));
+        RouletteAnimation r = new RouletteAnimation(selectedTile);
+
+        for (int i = 0; i < 37; i++) {
+            if (r.getNumber(i) == selectedTile) {
+                indexOfSelectedTile = i;
+                break;
+            }
+        }
+
+        selectedEvenOrOdd = r.getNumber(indexOfSelectedTile) % 2;
+
         if (selectedTile == 0) {
             selectedColor = 3;
-            selectedEvenOrOdd = 2;
         }
-        else if (selectedTile % 2 == 0) {
+        // else if (selectedTile % 2 == 0) {
+        //     selectedColor = 1;
+        //     selectedEvenOrOdd = 2;
+        // }
+        // else if (selectedColor % 2 == 1) {
+        //     selectedColor = 2;
+        //     selectedEvenOrOdd = 1;
+        // }
+
+        if (r.getColor(indexOfSelectedTile).equals("red")) {
             selectedColor = 1;
-            selectedEvenOrOdd = 2;
         }
-        else if (selectedColor % 2 == 1) {
+        if (r.getColor(indexOfSelectedTile).equals("green")) {
             selectedColor = 2;
-            selectedEvenOrOdd = 1;
         }
     }
 
