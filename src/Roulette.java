@@ -156,6 +156,7 @@ public class Roulette extends Game {
             }
             else {
                 System.out.println("You Lost $" + getBetSize() + ". HAHAHAHA");
+                a.setWallet(a.getWallet() - getBetSize());
             }
             roll();
             roulettesPlayed++;

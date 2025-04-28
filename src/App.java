@@ -25,7 +25,7 @@ public class App {
                 "Welcome to the Casino " + name + "! \n We have given you $10,000 to gamble with tonight. Enjoy!");
         p = new Player(name, 10000);
         outerLoop: while (true) {
-
+            //  beginning
             if (position == 0) {
                 System.out.println("""
                         Which game would you like to play?
@@ -237,7 +237,7 @@ public class App {
                 position =4;
             }
 
-            //if position = 6, change bet size
+            //if position = 6, change bet size for slots
             if (position == 6) {
                 System.out.println("""
                         What would you like to change your betsize to for Slots?
@@ -291,6 +291,7 @@ public class App {
                 System.out.println();
                 position = 4;
             }
+            //if position 9, change betsize for roulette
             if (position == 9){
                 System.out.println("""
                         What would you like to change your betsize to for roulette?
@@ -321,14 +322,16 @@ public class App {
                 System.out.println("you are now betting with a bet size of $" + r.getBetSize());
                 position = 4;
             }
-
+            //if position 10, end code
             if (position == 10){
                 break;
             }
+            //if position 11, play slots2d
             if (position ==11){
                 d.play2D(p);
                 position =4;
             }
+            //if position 12, change betsize for slots2d
             if (position == 12){
                 System.out.println("""
                         What would you like to change your betsize to for Slots2D?
@@ -359,12 +362,19 @@ public class App {
                 System.out.println("you are now betting with a bet size of $" + d.getBetSize());
                 position = 4;
             }
+            //check for money still in wallet
             if (p.getWallet() <= 0) {
                 System.out.println("You ran out of money!");
                 break outerLoop;
             }
             
         }
+        p.setTotalHandsPlayed(Slots.slotsPlayed + Roulette.roulettesPlayed +Slots2D.slots2DPlayed);
+        if (p.getWallet()<0){
+            p.setWallet(0);
+        }
+        System.out.println(p);
+        
        
     }
 
