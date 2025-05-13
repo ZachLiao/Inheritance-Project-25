@@ -1,8 +1,16 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 public class App {
+    private static Dotenv dotenv = Dotenv.load();
+    private static final String APP_ROOT = dotenv.get("APP_ROOT");
     private static Scanner in = new Scanner(System.in);
     private static String name;
     private static int position = 0;
@@ -12,6 +20,12 @@ public class App {
     private static Slots2D d;
     private static int previousPosition;
 
+        //1: hands played
+        //2: wallet
+        //3: name
+        //4: roulette betsize
+        //5: slots betsize
+        //6: slots2d betsize
     public static void main(String[] args) throws Exception {
         // System.out.println("Hello, Geffen!");
         // Roulette r1 = new Roulette("r1", 0, 0);
@@ -21,9 +35,29 @@ public class App {
         System.out.println(
                 "Welcome to the Casino! \n You will have the option of playing multiple different games tonight. \n First, lets get your name. Please type it in");
         name = in.nextLine();
+        if(!FileUtil.isFileExist(name + ".txt")) {
+            FileWriter myWriter = null;
+            try {
+                File myObj = new File(APP_ROOT + name + ".txt");
+                myObj.createNewFile();
+                myWriter = new FileWriter(APP_ROOT + name + ".txt");
+                p = new Player(name, 10000);
+                // myWriter.write(z.getGamesPlayed() + "\n" + z.getName() + "\n" + z.getBetSize() + "\n" + z.getBankroll());
+            } finally {
+                myWriter.close();
+            }
+        }
+        else {
+            p = new Player(FileUtil.getLine(3, APP_ROOT + name + ".txt"), Integer.valueOf(FileUtil.getLine(2, APP_ROOT + name + ".txt")));
+            p.setTotalHandsPlayed(Integer.valueOf(FileUtil.getLine(1, APP_ROOT + name + ".txt")));
+            //finish up initializing the variables (betsize)
+            // r.setBetSize(Integer.valueOf(FileUtil.getLine(4, APP_ROOT + name + ".txt")));
+            // s.setBetSize(Integer.valueOf(FileUtil.getLine(5, APP_ROOT + name + ".txt")));
+            // d.setBetSize(Integer.valueOf(FileUtil.getLine(6, APP_ROOT + name + ".txt")));
+        }
         System.out.println(
                 "Welcome to the Casino " + name + "! \n We have given you $10,000 to gamble with tonight. Enjoy!");
-        p = new Player(name, 10000);
+        
         outerLoop: while (true) {
             //  beginning
             if (position == 0) {
@@ -369,13 +403,33 @@ public class App {
             }
             
         }
-        p.setTotalHandsPlayed(Slots.slotsPlayed + Roulette.roulettesPlayed +Slots2D.slots2DPlayed);
-        if (p.getWallet()<0){
+        p.setTotalHandsPlayed(Slots.slotsPlayed + Roulette.roulettesPlayed + Slots2D.slots2DPlayed);
+        if (p.getWallet() < 0) {
             p.setWallet(0);
         }
         System.out.println(p);
-        
-       
+        int rBetsize = 0;
+        if (r != null) {
+            rBetsize = r.getBetSize();
+        }
+        int sBetsize = 0;
+        if (s != null) {
+            sBetsize = s.getBetSize();
+        }
+        int dBetsize = 0;
+        if (d != null) {
+            dBetsize = d.getBetSize();
+        }
+        FileWriter myWriter = new FileWriter(APP_ROOT + name + ".txt");
+        myWriter.write(p.getTotalHandsPlayed() + "\n" + p.getWallet() + "\n" + p.getName() + "\n" + rBetsize
+                + "\n" + sBetsize + "\n" + dBetsize);
+        myWriter.close();
+        //1: hands played
+        //2: wallet
+        //3: name
+        //4: roulette betsize
+        //5: slots betsize
+        //6: slots2d betsize
     }
 
 }

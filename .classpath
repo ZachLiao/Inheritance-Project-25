@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <!-- Source code folder -->
+    <classpathentry kind="src" path="src"/>
+
+    <!-- JAR files in the libs directory -->
+    <classpathentry kind="lib" path="lib/dotenv-java-3.2.0.jar"/>
+
+    <!-- Output folder for compiled classes -->
+    <classpathentry kind="output" path="bin"/>
+</classpath>
