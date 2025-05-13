@@ -65,7 +65,7 @@ public class Slots2D  extends Game{
             }
         }
         System.out.println("""
-                Now you may choose from 3 to 7 rows.
+                Now you may choose from 3 to 7 columns.
                 Type a number 3 through 7 to confirm your choice.
                 """);
         while (true) {
